@@ -1,0 +1,9 @@
+(define-inputs
+  [("script-name" string)
+   ("script-inputs" list)])
+(define available-scripts (list-scripts))
+(define matching-scripts (filter (lambda (script) (= (get-script-name script) script-name)) available-scripts))
+(define script-id (get-script-id (last matching-scripts)))
+(define execution (create-execution script-id script-inputs))
+(wait-for-execution execution)
+(define result (get-execution-output execution))
